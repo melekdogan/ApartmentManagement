@@ -1,0 +1,20 @@
+﻿using DataAccess.Abstract;
+using DataAccess.DBContexts;
+using DataAccess.EntityFrameworkCoreBase;
+using Models.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataAccess.Concrete
+{
+    public class UserRoleRepository : EntityRepositoryBase<ApartmentManagementDBContext
+        , UserRole>, IUserRoleRepository
+    {
+        public UserRoleRepository(ApartmentManagementDBContext dbContext) : base(dbContext)
+        {
+        }
+    }
+}
