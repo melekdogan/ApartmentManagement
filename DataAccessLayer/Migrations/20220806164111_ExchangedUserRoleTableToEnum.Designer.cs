@@ -4,14 +4,16 @@ using DataAccess.DBContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApartmentManagementDBContext))]
-    partial class ApartmentManagementDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220806164111_ExchangedUserRoleTableToEnum")]
+    partial class ExchangedUserRoleTableToEnum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,6 +140,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserRole")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserRoleId")
                         .HasColumnType("int");
 
                     b.HasKey("UserId");

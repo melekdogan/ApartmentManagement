@@ -1,4 +1,8 @@
-﻿using Business.Abstract;
+﻿using AutoMapper;
+using Business.Abstract;
+using BusinessLayer.Configuration.Response;
+using DataAccess.Abstract;
+using DTOs.Apartment;
 using Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,29 +15,54 @@ namespace Business.Concrete
 {
     public class ApartmentService : IApartmentService
     {
-        public Apartment Add(Apartment entity)
+        private readonly IApartmentRepository _apartmentRepository;
+        private readonly IMapper _mapper;
+
+        public ApartmentService(IApartmentRepository apartmentRepository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _apartmentRepository = apartmentRepository;
+            _mapper = mapper;
         }
 
-        public void Delete(Apartment entity)
+        public CommandResponse Add(CreateApartmentRequest request)
         {
-            throw new NotImplementedException();
+            var mapped = _mapper.Map<Apartment>(request);
+            _apartmentRepository.Add(mapped);
+            _apartmentRepository.SaveChanges();
+            return new CommandResponse()
+            {
+                Status = true,
+                Message = "Daire başarıyla kaydedildi!"
+            };
         }
 
-        public Apartment Get(Expression<Func<Apartment, bool>> expression)
+        public CommandResponse Delete(DeleteApartmentRequest request)
         {
-            throw new NotImplementedException();
+            var mapped = _mapper.Map<Apartment>(request);
+            _apartmentRepository.Delete(mapped);
+            _apartmentRepository.SaveChanges();
+            return new CommandResponse()
+            {
+                Status = true,
+                Message = "Daire kaydı başarıyla silindi!"
+            };
         }
 
-        public IEnumerable<Apartment> GetAll(Expression<Func<Apartment, bool>> expression = null)
+        public IEnumerable<Apartment> GetAll()
         {
-            throw new NotImplementedException();
+           return _apartmentRepository.GetAll();
         }
 
-        public Apartment Update(Apartment entity)
+        public CommandResponse Update(UpdateApartmentRequest request)
         {
-            throw new NotImplementedException();
+            var mapped = _mapper.Map<Apartment>(request);
+            _apartmentRepository.Update(mapped);
+            _apartmentRepository.SaveChanges();
+            return new CommandResponse()
+            {
+                Status = true,
+                Message = "Daire başarıyla Güncellendi!"
+            };
         }
     }
 }

@@ -22,8 +22,8 @@ namespace Models.Entities
         public InvoiceType InvoiceType { get; set; }
 
         public float InvoiceQuantity { get; set; }
-        public DateTime InvoiceDate { get; set; }
-        public bool IsPaid { get; set; }
+        public DateTime InvoiceDate { get; set; } = DateTime.Now;
+        public bool IsPaid { get; set; } 
 
     }
 }

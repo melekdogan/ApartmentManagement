@@ -21,4 +21,10 @@
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstract\MongoDB\" />
+    <Folder Include="Concrete\MongoDB\" />
+    <Folder Include="MongoBase\" />
+  </ItemGroup>
+
 </Project>

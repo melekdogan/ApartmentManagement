@@ -1,4 +1,5 @@
-﻿using Business.Abstract.BaseService;
+﻿using BusinessLayer.Configuration.Response;
+using DTOs.Apartment;
 using Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,11 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IApartmentService:IBaseService<Apartment>
+    public interface IApartmentService
     {
-       
+        public CommandResponse Add(CreateApartmentRequest request);
+        public CommandResponse Update(UpdateApartmentRequest request);
+        public CommandResponse Delete(DeleteApartmentRequest request);
+        public IEnumerable<Apartment> GetAll();
     }
 }

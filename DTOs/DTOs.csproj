@@ -5,10 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Apartment\" />
     <Folder Include="Invoice\" />
     <Folder Include="InvoiceType\" />
-    <Folder Include="Vehicle\" />
     <Folder Include="UserRole\" />
     <Folder Include="Tenant\" />
   </ItemGroup>

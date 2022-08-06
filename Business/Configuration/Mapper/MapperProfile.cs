@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using DTOs.Apartment;
 using DTOs.User;
+using DTOs.Vehicle;
 using Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,7 +16,12 @@ namespace BusinessLayer.Configuration.Mapper
         public MapperProfile()
         {
             #region Apartment Maps
-
+            CreateMap<Apartment, CreateApartmentRequest>();
+            CreateMap<CreateApartmentRequest,Apartment>();
+            CreateMap<Apartment, UpdateApartmentRequest>();
+            CreateMap<UpdateApartmentRequest,Apartment>();
+            CreateMap<Apartment, DeleteApartmentRequest>();
+            CreateMap<DeleteApartmentRequest,Apartment>();
             #endregion
 
             #region Invoice Maps
@@ -29,16 +36,21 @@ namespace BusinessLayer.Configuration.Mapper
 
             #endregion          
            
-            #region UserMaps 
-            CreateMap<User, CreateUserRequestDTO>();
-            #endregion
-  
-            #region UserRole Maps
-
+            #region User Maps 
+            CreateMap<User, CreateUserRequest>();
+            CreateMap<UpdateUserRequest,User>();
+            CreateMap<User, UpdateUserRequest>();
+            CreateMap<DeleteUserRequest,User>();
+            CreateMap<User, DeleteUserRequest>();
+            CreateMap<CreateUserRequest,User>();
+            
             #endregion
 
             #region Vehicle Maps
-
+            CreateMap<CreateVehicleRequest, Vehicle>();
+            CreateMap<Vehicle,CreateVehicleRequest>();
+            CreateMap<GetVehicleResponse, Vehicle>();
+            CreateMap<Vehicle, GetVehicleResponse>();
             #endregion
             
         }

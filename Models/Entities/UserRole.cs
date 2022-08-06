@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace Models.Entities
 {
-    public class UserRole
+    public enum UserRole
     {
-        [Key]
-        public int UserRoleId { get; set; }
-        public string UserRoleName { get; set; }
-        public IEnumerable<User> Users { get; set; }
+        Admin = 1,
+        User = 2,
+       
     }
 }

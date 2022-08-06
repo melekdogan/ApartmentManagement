@@ -1,5 +1,7 @@
 using Business.Abstract;
+using Business.Abstract.Auth;
 using Business.Concrete;
+using Business.Concrete.Auth;
 using BusinessLayer.Configuration.Mapper;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
@@ -45,8 +47,8 @@ namespace API
             services.AddScoped<IInvoiceTypeService, InvoiceTypeService>();
             services.AddScoped<ITenantService, TenantService>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IUserRoleService, UserRoleService>();
             services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IAuthService, AuthService>();
             #endregion
 
             #region Repositories (DataAccess Layer)
@@ -55,7 +57,6 @@ namespace API
             services.AddScoped<IInvoiceTypeRepository, InvoiceTypeRepository>();
             services.AddScoped<ITenantRepository, TenantRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
             #endregion
 

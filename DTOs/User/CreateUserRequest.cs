@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace DTOs.User
 {
-    public class CreateUserRequestDTO
+    public class CreateUserRequest
     {
         public string Name { get; set; }
         public string Surname { get; set; }
         public string IdentityNumber { get; set; }
         public string PhoneNumber { get; set; }
         public string EMail { get; set; }
-        public string UserPassword { get; set; }
-        public string ConfirmPassword { get; set; }
-        public UserRole Role { get; set; }
+        public UserRole Role { get; set; } 
     }
 }

@@ -18,8 +18,6 @@ namespace Models.Entities
         public string PhoneNumber { get; set; }
         public string EMail { get; set; }
         public UserPassword Password { get; set; }
-        public int UserRoleId { get; set; }
-        [ForeignKey("UserRoleId")]
         public UserRole UserRole { get; set; }
         public Vehicle Vehicle { get; set; }
         public Tenant Tenant { get; set; }

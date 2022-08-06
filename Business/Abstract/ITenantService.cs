@@ -1,5 +1,4 @@
-﻿using Business.Abstract.BaseService;
-using DataAccess.Abstract;
+﻿using DataAccess.Abstract;
 using Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface ITenantService:IBaseService<Tenant>
+    public interface ITenantService
     {
     }
 }

@@ -1,17 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32630.194
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{84BF5FC7-349F-4F37-8B4E-09A196F02E00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{84BF5FC7-349F-4F37-8B4E-09A196F02E00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccessLayer\DataAccess.csproj", "{1B07A83C-AEA1-40C8-8DD0-8406DC8B9C34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccessLayer\DataAccess.csproj", "{1B07A83C-AEA1-40C8-8DD0-8406DC8B9C34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{00030CE8-2A87-4037-8DD5-83834D22486B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{00030CE8-2A87-4037-8DD5-83834D22486B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{01DB1203-8B0D-4D36-9FD2-15D5F8A1350A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{01DB1203-8B0D-4D36-9FD2-15D5F8A1350A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOs", "DTOs\DTOs.csproj", "{441541D9-B560-4E45-89D9-FDE83FDC8611}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTOs", "DTOs\DTOs.csproj", "{441541D9-B560-4E45-89D9-FDE83FDC8611}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

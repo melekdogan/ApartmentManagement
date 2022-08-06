@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using DTOs.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,6 +18,20 @@ namespace API.Controllers
         public UserController(IUserService userService)
         {
             _userService = userService;
+        }
+
+        [HttpPost("Register")] //Kullanıcı Kaydetme İsteği (veritabanına ekleme)
+        public IActionResult Register(CreateUserRequest register)
+        {
+            var response = _userService.Register(register);
+            return Ok(response);
+        }
+
+        [HttpGet("ListAllUsers")] //Tüm Kullanıcıları listeleme isteği 
+        public IActionResult GetAll()
+        {
+            var data = _userService.GetAll();
+            return Ok(data);
         }
     }
 }

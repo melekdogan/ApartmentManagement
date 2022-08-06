@@ -4,14 +4,16 @@ using DataAccess.DBContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApartmentManagementDBContext))]
-    partial class ApartmentManagementDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220806164553_RemoveFKUserRoleFromUser")]
+    partial class RemoveFKUserRoleFromUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,8 +111,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("ApartmentId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Tenants");
                 });
@@ -190,8 +191,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("VehicleId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Vehicles");
                 });
@@ -224,8 +224,8 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("Models.Entities.User", "User")
-                        .WithOne("Tenant")
-                        .HasForeignKey("Models.Entities.Tenant", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -248,8 +248,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Models.Entities.Vehicle", b =>
                 {
                     b.HasOne("Models.Entities.User", "User")
-                        .WithOne("Vehicle")
-                        .HasForeignKey("Models.Entities.Vehicle", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -264,10 +264,6 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Models.Entities.User", b =>
                 {
                     b.Navigation("Password");
-
-                    b.Navigation("Tenant");
-
-                    b.Navigation("Vehicle");
                 });
 #pragma warning restore 612, 618
         }
