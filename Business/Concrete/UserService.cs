@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BackgroundJobs.Abstract;
 using Business.Abstract;
 using Business.Configuration.Auth;
 using Business.Configuration.Helper;
@@ -21,10 +22,12 @@ namespace Business.Concrete
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        private readonly IJob _hangfireJob;
+        public UserService(IUserRepository userRepository, IMapper mapper, IJob hangfireJob)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _hangfireJob = hangfireJob;
         }
 
         public CommandResponse Delete(DeleteUserRequest deleteUser)
@@ -58,6 +61,7 @@ namespace Business.Concrete
             //Kullanıcıyı ekleyip, eklediği kullanıcıyı veritabanına kaydediyor ve gereken bilgilendirme nesnesini geri döndürüyor. 
             _userRepository.Add(user);
             _userRepository.SaveChanges();
+            _hangfireJob.FireAndForget(user.UserId, user.Name);
             return new CommandResponse()
             {
                 Message = "Kullanıcı başarılı şekilde kaydedildi",

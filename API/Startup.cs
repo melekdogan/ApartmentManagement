@@ -19,6 +19,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hangfire;
+using Hangfire.SqlServer;
+using BackgroundJobs.Abstract;
+using BackgroundJobs.Concrete.HangFire;
+using BackgroundJobs.Concrete;
 
 namespace API
 {
@@ -32,7 +37,7 @@ namespace API
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)// Uygulama ayaða kalkýncaya kadar çalýþýr. 
         {
 
             services.AddControllers();
@@ -49,6 +54,9 @@ namespace API
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IAuthService, AuthService>();
+
+            services.AddScoped<IJob, HangFireJobs>();
+            services.AddScoped<ISendMailService, SendMailService>();
             #endregion
 
             #region Repositories (DataAccess Layer)
@@ -67,6 +75,26 @@ namespace API
             });
             #endregion
 
+            #region HangFire Implementation
+
+            services.AddHangfire(configuration => configuration
+         .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+         .UseSimpleAssemblyNameTypeSerializer()
+         .UseRecommendedSerializerSettings()
+         .UseSqlServerStorage(Configuration.GetConnectionString("HangfireConnection"), new SqlServerStorageOptions
+         {
+             CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+             SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+             QueuePollInterval = TimeSpan.Zero,
+             UseRecommendedIsolationLevel = true,
+             DisableGlobalLocks = true
+         }));
+
+            services.AddHangfireServer();
+            services.AddMvc();
+
+            #endregion
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
@@ -74,7 +102,7 @@ namespace API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)//Uygulama ayaða kalktýktan, yani çalýþtýktan sonra devreye giren konfigürasyonlardýr.
         {
             if (env.IsDevelopment())
             {
@@ -82,7 +110,8 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
-
+            
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions());
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -93,6 +122,7 @@ namespace API
             {
                 endpoints.MapControllers();
             });
+            
         }
     }
 }
