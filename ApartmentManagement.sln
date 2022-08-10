@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTOs", "DTOs\DTOs.csproj", "{441541D9-B560-4E45-89D9-FDE83FDC8611}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundJobs", "BackgroundJobs\BackgroundJobs.csproj", "{AAB15BAC-B2ED-4E03-B629-813376F593E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackgroundJobs", "BackgroundJobs\BackgroundJobs.csproj", "{AAB15BAC-B2ED-4E03-B629-813376F593E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cache", "Cache\Cache.csproj", "{4E84ECC8-FD24-47A4-A9C6-FD47A77A0E9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{AAB15BAC-B2ED-4E03-B629-813376F593E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAB15BAC-B2ED-4E03-B629-813376F593E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAB15BAC-B2ED-4E03-B629-813376F593E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E84ECC8-FD24-47A4-A9C6-FD47A77A0E9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E84ECC8-FD24-47A4-A9C6-FD47A77A0E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E84ECC8-FD24-47A4-A9C6-FD47A77A0E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E84ECC8-FD24-47A4-A9C6-FD47A77A0E9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

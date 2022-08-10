@@ -24,6 +24,8 @@ using Hangfire.SqlServer;
 using BackgroundJobs.Abstract;
 using BackgroundJobs.Concrete.HangFire;
 using BackgroundJobs.Concrete;
+using Business.Configuration.Cache;
+using StackExchange.Redis;
 
 namespace API
 {
@@ -72,6 +74,24 @@ namespace API
             services.AddAutoMapper(config =>
             {
                 config.AddProfile(new MapperProfile());
+            });
+            #endregion
+
+            #region Redis Implementation
+            var redisConfigInfo = Configuration.GetSection("RedisInfoEndpoint").Get<RedisEndpointInfo>();
+
+            services.AddStackExchangeRedisCache(opt =>
+            {
+                opt.ConfigurationOptions = new ConfigurationOptions()
+                {
+                    EndPoints =
+                    {
+                        { redisConfigInfo.EndPoint, redisConfigInfo.Port }
+                    },
+                    Password = redisConfigInfo.Password,
+                    User = redisConfigInfo.UserName
+
+                };
             });
             #endregion
 
