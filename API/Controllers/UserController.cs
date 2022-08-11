@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using DTOs.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -27,11 +29,26 @@ namespace API.Controllers
             return Ok(response);
         }
 
+        [HttpPut("Update")] //Kullanıcı Güncelleme İsteği 
+        public IActionResult Update(UpdateUserRequest register)
+        {
+            var response = _userService.Update(register);
+            return Ok(response);
+        }
+
+        [HttpDelete("Delete")] //Kullanıcı Silme İsteği 
+        public IActionResult Delete(DeleteUserRequest register)
+        {
+            var response = _userService.Delete(register);
+            return Ok(response);
+        }
+
         [HttpGet("ListAllUsers")] //Tüm Kullanıcıları listeleme isteği 
         public IActionResult GetAll()
         {
-            var data = _userService.GetAll();
-            return Ok(data);
+            var responseData = _userService.GetAll();
+            return Ok(responseData);
         }
+
     }
 }

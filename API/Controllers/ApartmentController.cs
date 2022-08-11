@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using DTOs.Apartment;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Entities;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ApartmentController : ControllerBase

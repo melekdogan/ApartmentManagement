@@ -8,6 +8,7 @@ using BusinessLayer.Configuration.Extensions;
 using BusinessLayer.Configuration.Response;
 using DataAccess.Abstract;
 using DTOs.User;
+using Microsoft.Extensions.Caching.Distributed;
 using Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -22,22 +23,29 @@ namespace Business.Concrete
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        private readonly IJob _hangfireJob;
-        public UserService(IUserRepository userRepository, IMapper mapper, IJob hangfireJob)
+        private readonly IDistributedCache _distributedCache;
+        public UserService(IUserRepository userRepository, IMapper mapper/*, IJob hangfireJob*/, IDistributedCache distributedCache)
         {
             _userRepository = userRepository;
             _mapper = mapper;
-            _hangfireJob = hangfireJob;
+            _distributedCache = distributedCache;
+            //_hangfireJob = hangfireJob;
         }
 
         public CommandResponse Delete(DeleteUserRequest deleteUser)
         {
-            throw new NotImplementedException();
+            var user = _mapper.Map<User>(deleteUser);
+            _userRepository.Delete(user);
+            return new CommandResponse()
+            {
+                Message = "Kullanıcı Başarıyla Silindi",
+                Status = true
+            };
         }
 
-        public IEnumerable<User> GetAll(Expression<Func<User, bool>> expression = null)
+        public IEnumerable<User> GetAll()
         {
-            return _userRepository.GetAll(expression);
+            return _userRepository.GetAll();
         }
 
         public CommandResponse Register(CreateUserRequest register)
@@ -48,7 +56,8 @@ namespace Business.Concrete
             #endregion
 
             byte[] passwordHash, passwordSalt;
-            HashHelper.CreatePasswordHash(PasswordHelper.CreateRandomPassword(), out passwordHash, out passwordSalt);// out kelimesi ile gönderdiğimiz değişkenin gösterdiği referans içini değiştirip geri gönderiyor. Yani değişkendeki değeri güncelleyip/doldurup bize geri döndürür. 
+            var password=PasswordHelper.CreateRandomPassword();
+            HashHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);// out kelimesi ile gönderdiğimiz değişkenin gösterdiği referans içini değiştirip geri gönderiyor. Yani değişkendeki değeri güncelleyip/doldurup bize geri döndürür. 
 
             var user = _mapper.Map<User>(register);//Gelen CreateUserRequest nesnesini User türüne dönüştürüyor (mapliyor) ve user nesnesine atıyor.
 
@@ -61,7 +70,7 @@ namespace Business.Concrete
             //Kullanıcıyı ekleyip, eklediği kullanıcıyı veritabanına kaydediyor ve gereken bilgilendirme nesnesini geri döndürüyor. 
             _userRepository.Add(user);
             _userRepository.SaveChanges();
-            _hangfireJob.FireAndForget(user.UserId, user.Name);
+            //_hangfireJob.FireAndForget(user.UserId, user.Name);
             return new CommandResponse()
             {
                 Message = "Kullanıcı başarılı şekilde kaydedildi",

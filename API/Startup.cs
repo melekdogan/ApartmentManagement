@@ -26,6 +26,9 @@ using BackgroundJobs.Concrete.HangFire;
 using BackgroundJobs.Concrete;
 using Business.Configuration.Cache;
 using StackExchange.Redis;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace API
 {
@@ -77,23 +80,23 @@ namespace API
             });
             #endregion
 
-            #region Redis Implementation
-            var redisConfigInfo = Configuration.GetSection("RedisInfoEndpoint").Get<RedisEndpointInfo>();
+            #region Redis Implementation  DÜZENLENECEK 
+            //var redisConfigInfo = Configuration.GetSection("RedisInfoEndpoint").Get<RedisEndpointInfo>();
 
-            services.AddStackExchangeRedisCache(opt =>
-            {
-                opt.ConfigurationOptions = new ConfigurationOptions()
-                {
-                    EndPoints =
-                    {
-                        { redisConfigInfo.EndPoint, redisConfigInfo.Port }
-                    },
-                    Password = redisConfigInfo.Password,
-                    User = redisConfigInfo.UserName
+            //services.AddStackExchangeRedisCache(opt =>
+            //{
+            //    opt.ConfigurationOptions = new ConfigurationOptions()
+            //    {
+            //        EndPoints =
+            //        {
+            //            { redisConfigInfo.EndPoint, redisConfigInfo.Port }
+            //        },
+            //        Password = redisConfigInfo.Password,
+            //        User = redisConfigInfo.UserName
 
-                };
-            });
-            #endregion
+            //    };
+            //});
+            #endregion 
 
             #region HangFire Implementation
 
@@ -115,9 +118,65 @@ namespace API
 
             #endregion
 
+            #region TOKEN Options
+
+            var tokenOptions = Configuration.GetSection("TokenOptions").Get<Business.Configuration.Auth.TokenOption>();
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidIssuer = tokenOptions.Issuer,
+                        ValidAudience = tokenOptions.Audience,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenOptions.SecurityKey))
+                    };
+                });
+
+
+
+            #endregion
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
+                      Enter 'Bearer' [space] and then your token in the text input below.
+                      \r\n\r\nExample: 'Bearer 12345abcdef'",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+
+                        },
+                        new List<string>()
+                    }
+                });
             });
         }
 
@@ -130,12 +189,15 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
-            
+
+            #region Hangfire Dashboard 
             app.UseHangfireDashboard("/hangfire", new DashboardOptions());
-            app.UseHttpsRedirection();
+            #endregion
+
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();//TokenOptions ile JwtBearer eklediysen bunu da eklemeyi unutma. Yoksa ConfigureServices içindeki token ayarlarý devreye girmez ve Yetkilendirme hatasý alýrsýn!!
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

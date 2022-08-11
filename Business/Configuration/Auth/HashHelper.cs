@@ -26,16 +26,17 @@ namespace Business.Configuration.Auth
         //Giriş sırasında gönderilen şifre bilgisi ve yine giriş sırasında gönderilen email bilgisinin ait olduğu kullanıcının veritabanındaki şifresini karşılaştırıp; eşleşiyorsa true, eşleşmiyorsa false döndürür.
         public static bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            using (var hmac = new HMACSHA512(passwordSalt))
+            using (var hmac = new HMACSHA512(passwordSalt))// buraya veritabanındaki salt password(key) bilgisi geliyor. 
             {
-                var computeHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+                var computeHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));// dışarıdan gelen şifre verisi hashleniyor. 
 
+                //Dışarıdan gelen şifrenin hashlenmiş hali ile veritabanındaki passwordHash verileri eşleşmezse şifreler aynı değil demektir ve false değeri döndürür. Orada zaten bir değer döndürdüğü için for loop un dışındaki return kodunu görmeyecektir. İşlem orada bitecektir.
                 for (int i = 0; i < computeHash.Length; i++)
                 {
                     if (computeHash[i] != passwordHash[i])
                         return false;
                 }
-
+                //Passwordlerin hash bilgileri eşleşirse döngüden çıktığında true döndürecektir. 
                 return true;
             }
         }

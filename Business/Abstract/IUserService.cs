@@ -16,6 +16,6 @@ namespace Business.Abstract
         CommandResponse Delete(DeleteUserRequest deleteUser);
         CommandResponse Update(UpdateUserRequest updateUser);
         CommandResponse Register(CreateUserRequest register);
-        IEnumerable<User> GetAll(Expression<Func<User, bool>> expression = null);
+        IEnumerable<User> GetAll();
     }
 }

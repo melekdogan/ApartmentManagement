@@ -11,7 +11,7 @@ namespace BackgroundJobs.Concrete
     {
         public void SendMail(int userId, string name)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
