@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Models.Entities
 {
-    public enum UserRole
-    {
-        Admin = 1,
-        User = 2,
-       
-    }
+  
+        public enum UserRole
+        {
+            Admin = 1,
+            User = 2,
+        }
+    
 }

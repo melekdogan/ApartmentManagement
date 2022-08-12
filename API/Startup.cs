@@ -29,6 +29,8 @@ using StackExchange.Redis;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Business.Abstract.Cache;
+using Business.Concrete.Cache;
 
 namespace API
 {
@@ -60,6 +62,7 @@ namespace API
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IAuthService, AuthService>();
 
+            services.AddScoped<ICache, Cache>();
             services.AddScoped<IJob, HangFireJobs>();
             services.AddScoped<ISendMailService, SendMailService>();
             #endregion
@@ -80,7 +83,7 @@ namespace API
             });
             #endregion
 
-            #region Redis Implementation  DÜZENLENECEK 
+            #region Redis Implementation 
             var redisConfigInfo = Configuration.GetSection("RedisEndpointInfo").Get<RedisEndpointInfo>();
 
             services.AddStackExchangeRedisCache(opt =>

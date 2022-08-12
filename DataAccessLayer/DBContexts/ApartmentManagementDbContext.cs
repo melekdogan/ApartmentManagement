@@ -25,6 +25,7 @@ namespace DataAccess.DBContexts
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserPassword> UserPasswords {get;set;}
+        public DbSet<UserPermission> UserPermissions {get;set;}
         public DbSet<Vehicle> Vehicles { get; set; }
         #endregion
 

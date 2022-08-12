@@ -21,5 +21,6 @@ namespace Models.Entities
         public UserRole UserRole { get; set; }
         public Vehicle Vehicle { get; set; }
         public Tenant Tenant { get; set; }
+        public ICollection<UserPermission> UserPermissions { get; set; }
     }
 }
