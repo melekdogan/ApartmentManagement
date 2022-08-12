@@ -81,21 +81,21 @@ namespace API
             #endregion
 
             #region Redis Implementation  DÜZENLENECEK 
-            //var redisConfigInfo = Configuration.GetSection("RedisInfoEndpoint").Get<RedisEndpointInfo>();
+            var redisConfigInfo = Configuration.GetSection("RedisEndpointInfo").Get<RedisEndpointInfo>();
 
-            //services.AddStackExchangeRedisCache(opt =>
-            //{
-            //    opt.ConfigurationOptions = new ConfigurationOptions()
-            //    {
-            //        EndPoints =
-            //        {
-            //            { redisConfigInfo.EndPoint, redisConfigInfo.Port }
-            //        },
-            //        Password = redisConfigInfo.Password,
-            //        User = redisConfigInfo.UserName
+            services.AddStackExchangeRedisCache(opt =>
+            {
+                opt.ConfigurationOptions = new ConfigurationOptions()
+                {
+                    EndPoints =
+                    {
+                        { redisConfigInfo.EndPoint, redisConfigInfo.Port }
+                    },
+                    Password = redisConfigInfo.Password,
+                    User = redisConfigInfo.UserName
 
-            //    };
-            //});
+                };
+            });
             #endregion 
 
             #region HangFire Implementation

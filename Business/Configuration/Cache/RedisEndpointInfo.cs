@@ -10,7 +10,7 @@ namespace Business.Configuration.Cache
     {
         public string EndPoint { get; set; }
         public int Port { get; set; } //Redis Sunucusuna ait port bilgisi
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public string UserName { get; set; }// redis kullanıcı adı 
+        public string Password { get; set; }// redis şifre 
     }
 }
