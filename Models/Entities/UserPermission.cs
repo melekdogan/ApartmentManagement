@@ -14,6 +14,8 @@ namespace Models.Entities
         public int Id { get; set; }
         public int UserId { get; set; }
         [ForeignKey("UserId")]
+        public int PermissionId { get; set; }
+        [ForeignKey("PermissionId")]
         public User User { get; set; }
         public Permission Permission { get; set; } 
     }

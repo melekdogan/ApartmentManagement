@@ -1,20 +1,16 @@
 ﻿
 
 
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace Models.Entities
 {
-    public enum Permission
+    public class Permission
     {
-        CreditCardGetAll=1,
-        CreditCardGetById,
-        CreditCardPost,
-        CreditCardGetPut,
-        CreditCardDelete,
-
-        CustomerGetAll,
-        CustomerGetAllForReport,
-        CustomerPost,
-        CustomerGetPut,
-        CustomerDelete,
+        [Key]
+        public int PermissionId { get; set; }   
+        public string Name { get; set; }   
+        ICollection<UserPermission> UserPermissions { get; set; }
     }
 }

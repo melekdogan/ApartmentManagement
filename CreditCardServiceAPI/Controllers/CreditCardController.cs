@@ -35,9 +35,6 @@ namespace APICreditCardService.Controllers
 
 
         [HttpPost]
-        // [LogFilter]
-        [Permission(Permission.CreditCardPost)]
-        [Authorize(Roles = "Admin")]
         public IActionResult Post(CreditCard request)
         {
             _service.Add(request);
