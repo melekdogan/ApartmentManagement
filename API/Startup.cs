@@ -31,6 +31,8 @@ using System.Text;
 using Business.Abstract.Cache;
 using Business.Concrete.Cache;
 using Configurations.Cache;
+using Configurations.Filters.Logs;
+using Configurations.Validator.FluentValidation.UserValidations;
 
 namespace API
 {
@@ -74,6 +76,7 @@ namespace API
             services.AddScoped<ITenantRepository, TenantRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddSingleton<CreateUserRequestValidator>();
             #endregion
 
             #region Auto Mapper Implementation
@@ -148,6 +151,7 @@ namespace API
 
             #endregion
 
+            services.AddSingleton<MsSqlLogger>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });

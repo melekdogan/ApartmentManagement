@@ -1,4 +1,4 @@
-using API.Configuration.Filters.Logs;
+using Configurations.Filters.Logs;
 using Business.Abstract.MongoDB;
 using Business.Concrete.MongoDB;
 using DataAccess.Abstract.MongoDB;
@@ -38,7 +38,7 @@ namespace APICreditCardService
             services.AddSingleton<MongoClient>(x => new MongoClient("mongodb://localhost:27017"));
            
             services.AddScoped<ICreditCardRepository, CreditCardRepository>(); 
-            services.AddScoped<ICreditCardService, CreditCardService>(); services.AddSingleton<MsSqlLogger>();
+            services.AddScoped<ICreditCardService, CreditCardService>(); 
             #endregion
             
             services.AddControllers();

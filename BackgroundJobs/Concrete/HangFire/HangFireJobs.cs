@@ -15,18 +15,12 @@ namespace BackgroundJobs.Concrete.HangFire
         {
             _sendMailService = sendMailService;
         }
+      
 
-        public void DelayedJob(int userId, string userName,TimeSpan timeSpan)// verilen işi belli(parametrede verilen) zamanda yapar. 
-        {
-            Hangfire.BackgroundJob.Schedule(() =>
-            _sendMailService.SendMail(userId,userName), timeSpan
-            ) ;
-        }
-
-        public void FireAndForget(int userId, string userName)//Verilen işi sıraya alır ve bir kez yapar. 
+        public void FireAndForget(string Firstname, string email, string password)//Verilen işi sıraya alır ve bir kez yapar. 
         {
             Hangfire.BackgroundJob.Enqueue(() =>
-            _sendMailService.SendMail(userId,userName)
+            _sendMailService.SendPasswordInfoMail(Firstname, email,password)
             );
         }
     }

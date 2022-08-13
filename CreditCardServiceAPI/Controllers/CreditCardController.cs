@@ -1,11 +1,10 @@
-﻿using API.Configuration.Filters.Auth;
-using Microsoft.AspNetCore.Mvc;
-using Business.Abstract;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Models.Document;
 using Models.Entities;
 using MongoDB.Bson;
 using Business.Abstract.MongoDB;
+using Configurations.Filters.Auth.PermissionAuth;
 
 namespace APICreditCardService.Controllers
 {

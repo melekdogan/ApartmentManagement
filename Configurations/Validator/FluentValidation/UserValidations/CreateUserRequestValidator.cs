@@ -1,5 +1,8 @@
-﻿using DTOs.User;
+﻿using DataAccess.DBContexts;
+using DTOs.User;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +13,7 @@ namespace Configurations.Validator.FluentValidation.UserValidations
 {
     public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
     {
+        
         public CreateUserRequestValidator()
         {
             RuleFor(u => u.Name).NotEmpty().WithMessage("Kullanıcı Adı boş geçilemez.");
@@ -17,8 +21,12 @@ namespace Configurations.Validator.FluentValidation.UserValidations
             RuleFor(u => u.IdentityNumber).NotEmpty().WithMessage("Kullanıcı TC Kimlik numarası boş geçilemez.");
             RuleFor(u => u.IdentityNumber).MaximumLength(11).MinimumLength(11).WithMessage("Kullanıcı TC Kimlik numarası 11 haneli olmak zorundadır!");
             RuleFor(u => u.EMail).EmailAddress().NotEmpty().WithMessage("E-mail Boş Geçilemez.");
+           
+            RuleFor(u => u.Role).IsInEnum().NotNull().WithMessage("Böyle bir rol bulunmamaktadır.");
             RuleFor(u => u.PhoneNumber).NotEmpty().WithMessage("Telefon numarası Boş Geçilemez.");
 
         }
+
+     
     }
 }

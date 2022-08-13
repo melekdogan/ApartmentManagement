@@ -16,7 +16,7 @@ namespace Configurations.Filters.Exception
         {
             //veri tabanına loglanabilir
             //mail atılababilir.
-
+            
             var msLogger = context.HttpContext.RequestServices.GetService(typeof(MsSqlLogger)) as MsSqlLogger;
 
             var jsonResult = new JsonResult(
@@ -26,13 +26,10 @@ namespace Configurations.Filters.Exception
                     innerException = context.Exception.InnerException,
                     statusCode = HttpStatusCode.InternalServerError
                 }
-
                 );
 
-            msLogger.LoggerManager.Error(jsonResult.Value.ToString());
-
+            msLogger._loggerManager.Error(jsonResult.Value.ToString());
             context.Result = jsonResult;
-
             base.OnException(context);
         }
     }

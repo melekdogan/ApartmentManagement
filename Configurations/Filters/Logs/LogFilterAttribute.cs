@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
-using Console = System.Console;
+using Console=System.Console;
 
 
 namespace Configurations.Filters.Logs
@@ -14,7 +14,7 @@ namespace Configurations.Filters.Logs
             var data = context.ActionArguments.Values;
             var logStr = System.Text.Json.JsonSerializer.Serialize(data);
 
-            msLogger.LoggerManager.Information(logStr);
+            msLogger._loggerManager.Information(logStr);
 
         }
 

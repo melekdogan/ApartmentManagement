@@ -1,17 +1,14 @@
 ﻿using Business.Abstract;
+using Configurations.Filters.Logs;
 using DTOs.Apartment;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ApartmentController : ControllerBase
@@ -22,7 +19,7 @@ namespace API.Controllers
         {
             _apartmentService = apartmentService;
         }
-
+        [LogFilter]
         [HttpPost("AddApartment")]
         public IActionResult Add(CreateApartmentRequest request)
         {

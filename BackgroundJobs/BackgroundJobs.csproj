@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Hangfire" Version="1.7.30" />
+    <PackageReference Include="MailKit" Version="3.3.0" />
   </ItemGroup>
 
 </Project>

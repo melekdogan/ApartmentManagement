@@ -7,27 +7,27 @@ namespace Configurations.Filters.Logs
 
     public class MsSqlLogger
     {
-        public ILogger LoggerManager;
+        public ILogger _loggerManager;
         public MsSqlLogger(IConfiguration configuration)
         {
-            var sinkOpt = new MSSqlServerSinkOptions()
+            var sinkOption = new MSSqlServerSinkOptions()
             {
                 TableName = "Logs",
-                AutoCreateSqlTable = true
+                AutoCreateSqlTable = true//veritabanında log tablosu yoksa otomatik oluşturur
             };
 
-            var columnOpts = new ColumnOptions();
-            columnOpts.Store.Remove(StandardColumn.Message);
-            columnOpts.Store.Remove(StandardColumn.Properties);
+            var columnOptions = new ColumnOptions();
+            columnOptions.Store.Remove(StandardColumn.Message);
+            columnOptions.Store.Remove(StandardColumn.Properties);
 
-            var seriLogConf = new LoggerConfiguration().WriteTo
+            var seriLogConfiguration = new LoggerConfiguration().WriteTo
                 .MSSqlServer(
-                    connectionString: configuration.GetConnectionString("MsComm"),
-                    sinkOptions: sinkOpt,
-                    columnOptions: columnOpts); //builder deseni
+                    connectionString: configuration.GetConnectionString("ConnString"),
+                    sinkOptions: sinkOption,
+                    columnOptions: columnOptions); //(builder desenine örnek bir kullanım)
 
 
-            LoggerManager = seriLogConf.CreateLogger();
+            _loggerManager = seriLogConfiguration.CreateLogger();
         }
     }
 }

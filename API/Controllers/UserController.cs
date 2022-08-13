@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -25,7 +25,7 @@ namespace API.Controllers
         [HttpPost("Register")] //Kullanıcı Kaydetme İsteği (veritabanına ekleme)
         public IActionResult Register(CreateUserRequest register)
         {
-            var response = _userService.Register(register);
+            var response = _userService.Register(register);//Kayıt başarılı olduktan sonra şifreniz mail adresinize otomatik gelecektir.
             return Ok(response);
         }
 
