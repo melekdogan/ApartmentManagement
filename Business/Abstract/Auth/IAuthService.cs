@@ -1,5 +1,5 @@
-﻿using Business.Configuration.Auth;
-using BusinessLayer.Configuration.Response;
+﻿using Configurations.Auth;
+using Configurations.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;

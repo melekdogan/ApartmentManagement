@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Configuration.Mapper
+namespace Configurations.Mapper
 {
     public class MapperProfile : Profile
     {
@@ -17,11 +17,11 @@ namespace BusinessLayer.Configuration.Mapper
         {
             #region Apartment Maps
             CreateMap<Apartment, CreateApartmentRequest>();
-            CreateMap<CreateApartmentRequest,Apartment>();
+            CreateMap<CreateApartmentRequest, Apartment>();
             CreateMap<Apartment, UpdateApartmentRequest>();
-            CreateMap<UpdateApartmentRequest,Apartment>();
+            CreateMap<UpdateApartmentRequest, Apartment>();
             CreateMap<Apartment, DeleteApartmentRequest>();
-            CreateMap<DeleteApartmentRequest,Apartment>();
+            CreateMap<DeleteApartmentRequest, Apartment>();
             #endregion
 
             #region Invoice Maps
@@ -34,25 +34,25 @@ namespace BusinessLayer.Configuration.Mapper
 
             #region Tenant Maps
 
-            #endregion          
-           
+            #endregion
+
             #region User Maps 
             CreateMap<User, CreateUserRequest>();
-            CreateMap<UpdateUserRequest,User>();
+            CreateMap<UpdateUserRequest, User>();
             CreateMap<User, UpdateUserRequest>();
-            CreateMap<DeleteUserRequest,User>();
+            CreateMap<DeleteUserRequest, User>();
             CreateMap<User, DeleteUserRequest>();
-            CreateMap<CreateUserRequest,User>();
-            
+            CreateMap<CreateUserRequest, User>();
+
             #endregion
 
             #region Vehicle Maps
             CreateMap<CreateVehicleRequest, Vehicle>();
-            CreateMap<Vehicle,CreateVehicleRequest>();
+            CreateMap<Vehicle, CreateVehicleRequest>();
             CreateMap<GetVehicleResponse, Vehicle>();
             CreateMap<Vehicle, GetVehicleResponse>();
             #endregion
-            
+
         }
     }
 }

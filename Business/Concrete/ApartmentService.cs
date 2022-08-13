@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstract;
-using BusinessLayer.Configuration.Response;
+using Configurations.Response;
 using DataAccess.Abstract;
 using DTOs.Apartment;
 using Models.Entities;

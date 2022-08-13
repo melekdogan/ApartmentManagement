@@ -1,7 +1,7 @@
 ﻿using Business.Abstract.Auth;
-using Business.Configuration.Auth;
-using Business.Configuration.Helper;
-using BusinessLayer.Configuration.Response;
+using Configurations.Auth;
+using Configurations.Helper;
+using Configurations.Response;
 using DataAccess.Abstract;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Distributed;

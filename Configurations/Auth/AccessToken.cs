@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Configuration.Auth
+namespace Configurations.Auth
 {
     public class AccessToken
     {

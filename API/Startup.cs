@@ -2,7 +2,7 @@ using Business.Abstract;
 using Business.Abstract.Auth;
 using Business.Concrete;
 using Business.Concrete.Auth;
-using BusinessLayer.Configuration.Mapper;
+using Configurations.Mapper;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
 using DataAccess.DBContexts;
@@ -24,13 +24,13 @@ using Hangfire.SqlServer;
 using BackgroundJobs.Abstract;
 using BackgroundJobs.Concrete.HangFire;
 using BackgroundJobs.Concrete;
-using Business.Configuration.Cache;
 using StackExchange.Redis;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Business.Abstract.Cache;
 using Business.Concrete.Cache;
+using Configurations.Cache;
 
 namespace API
 {
@@ -123,7 +123,7 @@ namespace API
 
             #region TOKEN Options
 
-            var tokenOptions = Configuration.GetSection("TokenOptions").Get<Business.Configuration.Auth.TokenOption>();
+            var tokenOptions = Configuration.GetSection("TokenOptions").Get<Configurations.Auth.TokenOption>();
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

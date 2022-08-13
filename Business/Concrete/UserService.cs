@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using BackgroundJobs.Abstract;
 using Business.Abstract;
-using Business.Configuration.Auth;
-using Business.Configuration.Helper;
-using Business.Configuration.Validator.FluentValidation.UserValidations;
-using BusinessLayer.Configuration.Extensions;
-using BusinessLayer.Configuration.Response;
+using Configurations.Auth;
+using Configurations.Helper;
+using Configurations.Validator.FluentValidation.UserValidations;
+using Configurations.Extensions;
+using Configurations.Response;
 using DataAccess.Abstract;
 using DTOs.User;
 using Microsoft.Extensions.Caching.Distributed;

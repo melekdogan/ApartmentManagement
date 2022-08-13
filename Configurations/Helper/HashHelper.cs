@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Configuration.Auth
+namespace Configurations.Helper
 {
     public static class HashHelper
     {

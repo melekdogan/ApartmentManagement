@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Configuration.Validator.FluentValidation.UserValidations
+namespace Configurations.Validator.FluentValidation.UserValidations
 {
     public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
     {
@@ -18,7 +18,7 @@ namespace Business.Configuration.Validator.FluentValidation.UserValidations
             RuleFor(u => u.IdentityNumber).MaximumLength(11).MinimumLength(11).WithMessage("Kullanıcı TC Kimlik numarası 11 haneli olmak zorundadır!");
             RuleFor(u => u.EMail).EmailAddress().NotEmpty().WithMessage("E-mail Boş Geçilemez.");
             RuleFor(u => u.PhoneNumber).NotEmpty().WithMessage("Telefon numarası Boş Geçilemez.");
-      
+
         }
     }
 }

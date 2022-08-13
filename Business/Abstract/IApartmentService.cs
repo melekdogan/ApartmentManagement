@@ -1,4 +1,4 @@
-﻿using BusinessLayer.Configuration.Response;
+﻿using Configurations.Response;
 using DTOs.Apartment;
 using Models.Entities;
 using System;

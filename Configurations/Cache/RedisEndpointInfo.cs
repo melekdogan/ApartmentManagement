@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Configuration.Cache
+namespace Configurations.Cache
 {
     public class RedisEndpointInfo
     {
