@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Models.Entities;
 
-namespace Configurations.Filters.Auth.PermissionAuth
+namespace Configurations.Filters.PermissionAuth
 {
     public class PermissionAttribute : TypeFilterAttribute
     {

@@ -6,7 +6,7 @@ using Models.Entities;
 using System.Linq;
 
 
-namespace Configurations.Filters.Auth.PermissionAuth
+namespace Configurations.Filters.PermissionAuth
 {
 
     public class PermissionFilter : IAuthorizationFilter

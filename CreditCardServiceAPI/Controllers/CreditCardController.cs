@@ -4,7 +4,7 @@ using Models.Document;
 using Models.Entities;
 using MongoDB.Bson;
 using Business.Abstract.MongoDB;
-using Configurations.Filters.Auth.PermissionAuth;
+using Configurations.Filters.PermissionAuth;
 
 namespace APICreditCardService.Controllers
 {
